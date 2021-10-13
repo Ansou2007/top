@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="inscription.css">
+    <title>Création de compte</title>
+</head>
+
+<body>
+    <form action="/action_page.php ">
+        <div class="inscription ">
+            <h1>Inscrivez-vous</h1>
+            <label for="fname ">Nom:</label><br>
+            <input type="text " id="fname " name="fname "><br>
+            <label for="lname ">Prénom:</label><br>
+            <input type="text " id="lname " name="lname "><br>
+            <label for="birthdaytime ">Date de naissance:</label><br>
+            <input type=" " name="birthdaytime "><br>
+            <label for="fname ">Lieu de naissance:</label><br>
+            <input type="text " id="fname " name="fname "><br>
+            <label for="email ">Email:</label><br>
+            <input type="email " id="email " name="email "><br>
+            <label for="username">Nom d'utilsateur:</label><br>
+            <input type="text" id="username" name="username"><br>
+            <label for="pwd">Mot de passe:</label><br>
+            <input type="password" id="pwd" name="pwd"><br>
+            <label for="psw">Confirmer le mot de passe</label><br>
+            <input type="password" id="pwd" name="pwd"><br>
+            <label for="countrie ">Pays:</label><br>
+            <select id="countries" name="pays">
+            <option value=" "></option>
+          <option value="sénégal ">Sénégal</option>
+          <option value="autres ">Autres</option>
+        </select><br>
+
+            <!----------=========================================REGION++++++++++++++++++++++++++===========----------->
+
+            <label for="City ">Région:</label><br>
+            <select id="région " name="région ">
+         
+          <option value="dkr ">Dakar</option>
+          <option value="dl ">Dioubel</option>
+          <option value="fk ">Factik</option>
+          <option value="kf ">Kaffrine</option>
+          <option value="klk ">Kaolack</option>
+          <option value="kg ">Kédougou</option>
+          <option value="kld ">Kolda</option>
+          <option value="lg ">Louga</option>
+          <option value="mtm ">Matam</option>
+          <option value="sl ">Saint-Louis</option>
+          <option value="sdh ">Sédhiou</option>
+          <option value="tamba ">Tambacounda</option>
+          <option value="th ">Thiés</option>
+          <option value="zg ">Ziguinchor</option>
+        </select><br><br>
+            <!----------=========================================REGION Fin++++++++++++++++++++++++++===========----------->
+
+            <!----------=========================================DEPARTEMENT++++++++++++++++++++++++++===========----------->
+
+            <label for="Departement ">Département:</label><br>
+            <select id="dptmnt " name="département ">
+          <option value="dkr ">Dakar</option>
+          <option value="dkr ">Pikine</option>
+          <option value="dkr ">Rufisque</option>
+          <option value="dkr ">Guédiaway</option>
+          <option value="dkr ">Keur Massar</option>
+ <!----------=========================================départemnt dl++++++++++++++++++++++++++===========----------->
+          <option value="dl ">Dioubel</option>
+          <option value="dl ">Bambay</option>
+          <option value="dl ">Mbacké</option>
+ <!----------========================================département fatick++++++++++++++++++++++++++===========----------->
+ <option value="fk ">Factik</option>
+ <option value="fk ">Foudiougne</option>
+ <option value="fk ">Gossas</option>
+ <!----------=========================================département kaff++++++++++++++++++++++++++===========----------->
+          <option value="kf ">Kaffrine</option>
+          <option value="kf ">Birkilane</option>
+          <option value="kf ">Malém-Hodar</option>
+ <!----------=========================================département klk++++++++++++++++++++++++++===========----------->
+          <option value="klk ">Kaolack</option>
+          <option value="klk ">Guinguinéo</option>
+          <option value="klk ">Nioro Du Rip</option>
+ <!----------=========================================département kédougou++++++++++++++++++++++++++===========----------->
+          <option value="kg ">Kédougou</option>
+          <option value="kg ">Salemata</option>
+          <option value="kg ">Saraya</option>
+<!----------=========================================département kolda++++++++++++++++++++++++++===========----------->
+           <option value="kld ">Kolda</option>
+           <option value="kdl ">Médina Yoro Foula</option>
+           <option value="kdl ">Vélingara</option>
+ <!----------=========================================Departement Louga++++++++++++++++++++++++++===========----------->
+          <option value="lg ">Louga</option>
+          <option value="lg ">Linguére</option>
+          <option value="lg ">Kébémer</option>
+ <!----------=========================================Département Matam++++++++++++++++++++++++++===========----------->
+          <option value="mtm ">Kanel</option>
+          <option value="mtm ">Ranérou</option>
+          <option value="mtm ">Matam</option>
+ <!----------=========================================Département Saint-loius++++++++++++++++++++++++++===========----------->
+          <option value="sl ">Bakel</option>
+          <option value="sl ">Dagana</option>
+          <option value="sl ">Podor</option>
+          <option value="sl ">Saint-Louis</option>
+ <!----------=========================================Départemnt Sédhiou++++++++++++++++++++++++++===========----------->
+          <option value="sdh ">Sédhiou</option>
+          <option value="sdh ">Bounkiling</option>
+          <option value="sdh ">Goudomp</option>
+ <!----------=========================================Départemnt Tamba++++++++++++++++++++++++++===========----------->
+          <option value="tamba ">Tambacounda</option>
+          <option value="tamba ">Goudouri</option>
+          <option value="tamba ">Koumpentoum</option>
+ <!----------=========================================Département Ziguinchor++++++++++++++++++++++++++===========----------->
+          <option value="zg ">Bignona</option>
+          <option value="dkr ">Oussouye</option>
+          <option value="zg ">Ziguinchor</option>
+ <!----------==========================================Départemen Thiés++++++++++++++++++++++++++===========----------->
+          <option value="th ">Thiés</option>
+          <option value="th ">Tivaoune</option>
+          <option value="th ">M'bour</option>
+          <!-------=================================Département Fin============================------------->
+        </select><br><br>
+        </div>
+        <input type="submit " value="S 'inscrire">
+    </form>
+
+</body>
+
+</html>
