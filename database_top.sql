@@ -45,7 +45,7 @@ ON UPDATE CASCADE;
 ALTER TABLE utilisateur ADD CONSTRAINT fk_ut_com FOREIGN KEY(id_commune) REFERENCES commune(id)
 ON UPDATE CASCADE;
 
-CREATE TABLE declaration(
+CREATE TABLE declaration_perdu(
 id int PRIMARY KEY AUTO_INCREMENT,
 id_utilisateur int(11),
 code_declaration varchar(100),
@@ -56,7 +56,21 @@ objet_trouve varchar(3) DEFAULT 'NON',/* OUI: objet trouvé  NON: objet non trou
 contact varchar(25), /*Le numero a contacter au cas ou l'objet est trouvé*/
 autorisation varchar(20) /* Approuver, Mise en Examen,Archiver*/
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
-ALTER TABLE declaration ADD CONSTRAINT fk_dec_uti FOREIGN KEY(id_utilisateur) REFERENCES utilisateur(id)
+ALTER TABLE declaration_perdu ADD CONSTRAINT fk_perdu_uti FOREIGN KEY(id_utilisateur) REFERENCES utilisateur(id)
+ON UPDATE CASCADE; 
+
+CREATE TABLE declaration_Trouve(
+id int PRIMARY KEY AUTO_INCREMENT,
+id_utilisateur int(11),
+code_trouve varchar(100),
+date_declaration datetime,
+description varchar(250), /*Description de l'objet perdu*/
+images text,
+objet_trouve varchar(3) DEFAULT 'NON',/* OUI: objet trouvé  NON: objet non trouvé*/
+contact varchar(25), /*Le numero a contacter au cas ou l'objet est trouvé*/
+autorisation varchar(20) /* Approuver, Mise en Examen,Archiver*/
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+ALTER TABLE declaration_trouve ADD CONSTRAINT fk_trouv_uti FOREIGN KEY(id_utilisateur) REFERENCES utilisateur(id)
 ON UPDATE CASCADE; 
 
 CREATE TABLE historique(
