@@ -4,3 +4,8 @@
 Ce projet est supervisé par Mr Birahim BABOU
 # Chef de Projet Ansoumane Michel TAMBA
 
+# Mohamed LOUM: Web Design
+# Oscar DIANDY: Conception Template
+# Henry DIATTA: Conception Template
+
+
