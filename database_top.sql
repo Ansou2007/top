@@ -11,7 +11,7 @@ CREATE TABLE region (
 CREATE TABLE departement(
   id int(11) PRIMARY KEY AUTO_INCREMENT,
   id_region int(11) ,
-  nom_departement varchar(10) 
+  nom_departement varchar(50) 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE departement ADD CONSTRAINT fk_dep_reg FOREIGN KEY(id_region)

@@ -1,3 +1,9 @@
+<?php
+		require('../../core/configuration.php');
+		
+		$region = $con->prepare("SELECT * FROM region ORDER BY nom_region");
+		$region->execute();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,10 +12,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inscription</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../includes/assets/css/bootstrap.css">
-    <link rel="stylesheet" href="../../includes/assets/vendors/bootstrap-icons/bootstrap-icons.css">
-    <link rel="stylesheet" href="../../includes/assets/css/app.css">
-    <link rel="stylesheet" href="../../includes/assets/css/pages/auth.css">
+    <link rel="stylesheet" href="<?php echo base_url?>/includes/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="<?php echo base_url?>/includes/assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="<?php echo base_url?>/includes/assets/css/app.css">
+    <link rel="stylesheet" href="<?php echo base_url?>/includes/assets/css/pages/auth.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
 </head>
 
 <body>
@@ -37,35 +44,43 @@
                     </div>
                 </div>
                 <div class="form-group position-relative has-icon-left mb-4">
-                    <input type="password" class="form-control form-control-xl" placeholder="Password">
+                    <input type="password" class="form-control form-control-xl" placeholder="Mot de passe">
                     <div class="form-control-icon">
                         <i class="bi bi-shield-lock"></i>
                     </div>
                 </div>
                 <div class="form-group position-relative has-icon-left mb-4">
-                    <input type="password" class="form-control form-control-xl" placeholder="Confirmation Password">
+                    <input type="password" class="form-control form-control-xl" placeholder="Confirmation Mot de passe">
                     <div class="form-control-icon">
                         <i class="bi bi-shield-lock"></i>
                     </div>
                 </div>
 				<!--REGION-->
 				<div class="form-group position-relative has-icon-left mb-4">
-                    <select class="form-control form-control-xl form-select">
-						<option>REGION</option>
-						<option>Voir</option>
+                    <select name="region" class="form-control form-control-xl form-select" onChange="ListeDepartement(this.value) ;">
+						<option value="0">Sélectionner</option>
+												
+						<?php 
+						foreach($region as $region)
+						{?>
+						<option											
+						value="<?php echo  $region['id'] ?>" > 
+						<?php echo  $region['nom_region'] ?> 														
+						</option>
+						<?php }?>
+						
 					</select>
                     <div class="form-control-icon">
-                        <i class="bi bi-shield-lock"></i>
+                        <i class="bi bi-clipboard-plus"></i>
                     </div>
                 </div>
 				<!--DEPARTEMENT-->
 				<div class="form-group position-relative has-icon-left mb-4">
-                    <select class="form-control form-control-xl form-select">
-						<option></option>
-						<option>DEPARTEMENT--</option>
+                    <select id="liste_departement" name="departement"  class="form-control form-control-xl form-select">
+						
 					</select>
                     <div class="form-control-icon">
-                        <i class="bi bi-shield-lock"></i>
+                        <i class="bi bi-clipboard"></i>
                     </div>
                 </div>
 				<!--COMMUNE-->
@@ -75,7 +90,7 @@
 						<option>COMMUNE--</option>
 					</select>
                     <div class="form-control-icon">
-                        <i class="bi bi-shield-lock"></i>
+                        <i class="bi bi-clipboard-data"></i>
                     </div>
                 </div>
 				
@@ -94,6 +109,9 @@
 </div>
 
     </div>
+	<script  src="ListeDepartement.js">
+		
+	</script>
 </body>
 
 </html>

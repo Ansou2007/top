@@ -1,5 +1,9 @@
 <?php
-		require('./core/configuration.php')
+		require('./core/configuration.php');
+		
+		if(isset($_POST['connexion'])){
+			header('location:Accueil');
+		}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -24,10 +28,10 @@
             <div class="auth-logo">
                 <a href=""><img src="assets/images/logo/logo.png" alt="Logo"></a>
             </div>
-            <h1 class="auth-title">Log in.</h1>
+            <h1 class="auth-title">Connexion</h1>
             
 
-            <form action="">
+            <form action="" method="POST">
                 <div class="form-group position-relative has-icon-left mb-4">
                     <input type="text" class="form-control form-control-xl" placeholder="Votre Mail">
                     <div class="form-control-icon">
@@ -46,11 +50,11 @@
                         Se souvenir de moi
                     </label>
                 </div>
-                <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Connexion</button>
+                <button type="submit" name="connexion" class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Connexion</button>
             </form>
             <div class="text-center mt-5 text-lg fs-4">
-                <p class="text-gray-600">Creer un Compte? <a href="" class="font-bold">Sign
-                        up</a>.</p>
+                <p class="text-gray-600">Pas de Compte? <a href="inscription" class="font-bold">Creer
+                        </a>.</p>
                 <p><a class="font-bold" href="">Mot de Passe Oublié</a>.</p>
             </div>
         </div>

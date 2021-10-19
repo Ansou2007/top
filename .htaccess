@@ -1,0 +1,5 @@
+RewriteEngine on
+
+RewriteRule ^Accueil$ views/Accueil.php
+RewriteRule ^inscription$ views/utilisateurs/inscription.php
+RewriteRule ^liste_departement views/utilisateurs/liste_departement.php
