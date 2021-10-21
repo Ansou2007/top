@@ -55,6 +55,12 @@
                         <i class="bi bi-shield-lock"></i>
                     </div>
                 </div>
+				<div class="form-group position-relative has-icon-left mb-4">
+                    <input type="text" class="form-control form-control-xl" placeholder="Téléphone">
+                    <div class="form-control-icon">
+                        <i class="bi bi-phone-fill"></i>
+                    </div>
+                </div>
 				<!--REGION-->
 				<div class="form-group position-relative has-icon-left mb-4">
                     <select name="region" class="form-control form-control-xl form-select" onChange="ListeDepartement(this.value) ;">
@@ -76,7 +82,7 @@
                 </div>
 				<!--DEPARTEMENT-->
 				<div class="form-group position-relative has-icon-left mb-4">
-                    <select id="liste_departement" name="departement"  class="form-control form-control-xl form-select">
+                    <select id="liste_departement" name="departement" onChange="ListeCommune(this.value)"  class="form-control form-control-xl form-select">
 						
 					</select>
                     <div class="form-control-icon">
@@ -85,9 +91,8 @@
                 </div>
 				<!--COMMUNE-->
 				<div class="form-group position-relative has-icon-left mb-4">
-                    <select class="form-control form-control-xl form-select">
-						<option></option>
-						<option>COMMUNE--</option>
+                    <select id="liste_commune" class="form-control form-control-xl form-select">				
+						
 					</select>
                     <div class="form-control-icon">
                         <i class="bi bi-clipboard-data"></i>
@@ -109,8 +114,29 @@
 </div>
 
     </div>
-	<script  src="ListeDepartement.js">
-		
+	<script >
+		function ListeDepartement(val) {
+			$.ajax({
+			type: "POST",
+			url: "liste_departement.php",
+			data:'id_region='+val,
+			success: function(data){
+				$("#liste_departement").html(data);
+			}
+			});
+			}
+	</script>
+	<script>
+	function ListeCommune(val){
+		$.ajax({
+			type:"POST",
+			url:"liste_commune.php",
+			data:'id_departement='+val,
+			success: function(data){
+				$("#liste_commune").html(data);
+			}
+		})
+	}
 	</script>
 </body>
 
