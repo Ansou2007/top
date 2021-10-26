@@ -1,7 +1,0 @@
-RewriteEngine on
-
-RewriteRule ^Accueil$ views/Accueil.php
-RewriteRule ^inscription$ views/utilisateurs/inscription.php
-RewriteRule ^liste_departement views/utilisateurs/liste_departement.php
-RewriteRule ^liste_commune views/utilisateurs/liste_commune.php
-RewriteRule ^perdu$ views/declaration_perdu/index.php
