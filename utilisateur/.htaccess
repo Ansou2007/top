@@ -1,8 +1,51 @@
-RewriteEngine on
 
-RewriteRule ^Accueil$ views/Accueil.php
-RewriteRule ^inscription$ views/utilisateurs/inscription.php
-RewriteRule ^liste_departement views/utilisateurs/liste_departement.php
-RewriteRule ^liste_commune views/utilisateurs/liste_commune.php
-RewriteRule ^liste_perdu$ views/declaration_perdu/liste_perdu.php
-RewriteRule ^perdu$ views/declaration_perdu/index.php
+
+
+#### Mes AjoutS ############
+RewriteEngine on
+RewriteRule ^accueil$ views/accueil.php
+RewriteRule ^index$ index.php
+RewriteRule ^creer_compte$ views/utilisateur/creer_compte.php
+RewriteRule ^liste_commune views/utilisateur/liste_commune.php
+RewriteRule ^liste_departement views/utilisateur/liste_departement.php
+
+#### PERDU ###
+RewriteRule ^perdu$ views/perdu/index.php
+RewriteRule ^ajout_cellule$ views/cellule/ajout_cellule.php
+RewriteRule ^supprimer_cellule$ views/cellule/supprimer_cellule.php
+
+### MILTROUVEITANT ###
+RewriteRule ^ajout_militant$ views/militant/ajout_militant.php
+RewriteRule ^supprimer_militant$ views/militant/supprimer_militant.php
+RewriteRule ^trouve$ views/trouve/index.php
+
+### UTILISATEUR ###
+RewriteRule ^utilisateur$ views/utilisateur/index.php
+RewriteRule ^supprimer_utilisateur$ views/utilisateur/supprimer_utilisateur.php
+RewriteRule ^mon_compte$ views/utilisateur/mon_compte.php
+RewriteRule ^recuperation$ views/utilisateur/recuperation.php
+### REGION ###
+RewriteRule ^region$ views/administration/region/index.php
+RewriteRule ^supprimer_region$ views/administration/region/supprimer_region.php
+
+RewriteRule ^departement$ views/administration/departement/index.php
+### COMMUNE ###
+RewriteRule ^commune$ views/administration/commune/index.php
+RewriteRule  ^ajout_commune$ views/administration/commune/ajout_commune.php
+RewriteRule  ^supprimer_commune$ views/administration/commune/supprimer_commune.php
+
+RewriteRule ^deconnexion$ views/utilisateur/deconnexion.php
+RewriteRule ^super_admin$ super_admin/index.php
+
+###ADMINISTRATION ####
+RewriteRule  ^ajout_region$ views/administration/region/ajout_region.php
+RewriteRule  ^ajout_departement$ views/administration/departement/ajout_departement.php
+RewriteRule ^supprimer_departement views/administration/departement/supprimer_departement.php
+
+
+
+
+### FIN Ajout ########
+
+
+

@@ -1,72 +1,102 @@
 <?php
-		require('./core/configuration.php');
+
+require_once 'Configuration.php';
+require_once('core/connection.php');
+include('includes/header.php'); 
+session_start();
+		@$login = strip_tags(trim($_POST['login']));
+		@$motdepass = strip_tags($_POST['mot_de_passe']);
+		@$valider=$_POST["valider"];
+	
+	if(isset($valider)){
+		$query=$con->prepare('select * from utilisateur,region,departement,commune where login=? and utilisateur.id_commune=commune.id and utilisateur.id_departement=departement.id ');
+		//$query->setFetchMode(PDO::FETCH_ASSOC);
+		$query->bindValue(1,$login);
+		$query->execute();
+		$utilisateur=$query->fetch();
+		if(!password_verify($motdepass,$utilisateur['motdepass']))
+		$erreur = "Login ou Mot de passe incorrecte";
 		
-		if(isset($_POST['connexion'])){
-			header('location:Accueil');
+		else{
+			if($utilisateur['etat']==="0" )
+			{
+				$erreur = "Votre compte n'est pas activé,Contacter l'administrateur sur 774418426";
+			}else{			
+			header('location:accueil');
+			$_SESSION['utilisateur'] = $utilisateur;
+			$_SESSION['time'] = time();
+			}
 		}
+	}
 ?>
-<!DOCTYPE html>
-<html lang="fr">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TrouvéOuPerdu</title>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="<?php echo base_url?>/includes/assets/css/bootstrap.css">
-    <link rel="stylesheet" href="<?php echo base_url?>/includes/assets/vendors/bootstrap-icons/bootstrap-icons.css">
-    <link rel="stylesheet" href="<?php echo base_url?>/includes/assets/css/app.css">
-    <link rel="stylesheet" href="<?php echo base_url?>/includes/assets/css/pages/auth.css">
-</head>
 
-<body>
-    <div id="auth">
-        
-<div class="row h-100">
-    <div class="col-lg-5 col-12">
-        <div id="auth-left">
-            <div class="auth-logo">
-                <a href=""><img src="assets/images/logo/logo.png" alt="Logo"></a>
-            </div>
-            <h1 class="auth-title">Connexion</h1>
+
+
+<div class="container">
+
+<!-- Outer Row -->
+<div class="row justify-content-center">
+
+  <div class="col-xl-6 col-lg-6 col-md-6">
+
+    <div class="card o-hidden border-0 shadow-lg my-5">
+      <div class="card-body p-0">
+        <!-- Nested Row within Card Body -->
+        <div class="row">
+			
+          <div class="col-lg-12">
+		  
+            <div class="p-5">
+              <div class="text-center">
+					 <?php
+			
+                    if(isset($erreur)) 
+                    {
+                        echo '<h5 class="bg-danger text-white"> '.$erreur.' </h5>';
+							header('refresh:3,url=index');
+                        $erreur = null;
+                    }
+					
+                ?>
+			  
+                <h1 class="h4 text-gray-900 mb-4">SYSTEME D'AUTHENTIFICATION</h1>
+               
+              </div>
+
+                <form class="user" action="" method="POST">
+
+                    <div class="form-group">
+                    <input type="text" name="login" class="form-control form-control-user" placeholder="Votre nom d'utilisateur...">
+                    </div>
+                    <div class="form-group">
+                    <input type="password" name="mot_de_passe" class="form-control form-control-user" placeholder="Votre Mot de passe">
+                    </div>
             
-
-            <form action="" method="POST">
-                <div class="form-group position-relative has-icon-left mb-4">
-                    <input type="text" class="form-control form-control-xl" placeholder="Votre Mail">
-                    <div class="form-control-icon">
-                        <i class="bi bi-person"></i>
-                    </div>
-                </div>
-                <div class="form-group position-relative has-icon-left mb-4">
-                    <input type="password" class="form-control form-control-xl" placeholder="Mot de Passe">
-                    <div class="form-control-icon">
-                        <i class="bi bi-shield-lock"></i>
-                    </div>
-                </div>
-                <div class="form-check form-check-lg d-flex align-items-end">
-                    <input class="form-check-input me-2" type="checkbox" value="" id="flexCheckDefault">
-                    <label class="form-check-label text-gray-600" for="flexCheckDefault">
-                        Se souvenir de moi
-                    </label>
-                </div>
-                <button type="submit" name="connexion" class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Connexion</button>
-            </form>
-            <div class="text-center mt-5 text-lg fs-4">
-                <p class="text-gray-600">Pas de Compte? <a href="inscription" class="font-bold">Creer
-                        </a>.</p>
-                <p><a class="font-bold" href="">Mot de Passe Oublié</a>.</p>
+                    <button type="submit" name="valider" class="btn btn-primary btn-user btn-block"> Connecter </button>
+                    <hr>
+                </form>
+					<a class="btn btn-warning btn-block" href="creer_compte">Créer un Compte</a>
+					
             </div>
+          </div>
         </div>
+      </div>
+	  <div class="card-footer">
+	  <input type="checkbox" name="souvenir"> <span>Se souvenir </span>
+	  <a class="float-right" href="recuperation">Mot de passe Oublié ?</a>
+	  <b><p class="text-center" style="color:black">Copyright &copy; IDA-P6-<?php echo date('Y')?>
+	  
+	  </div>
     </div>
-    <div class="col-lg-7 d-none d-lg-block">
-        <div id="auth-right">
 
-        </div>
-    </div>
+  </div>
+
 </div>
 
-    </div>
-</body>
+</div>
 
-</html>
+
+<?php
+//include('includes/scripts.php'); 
+?>
