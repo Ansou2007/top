@@ -8,18 +8,6 @@
 		 //POUR LA LISTE DEROULANTE DE LA REGION
 	$region = $con->prepare('SELECT * FROM region order by nom_region');
 	$region->execute();
-		//VERIFICATION DE LA CASE NOM COMPLET
-	/*if(!empty($_POST['nom_complet'])){
-		$nom_complet = $_POST['nom_complet'];
-		if(strlen($nom_complet) < 5  || strlen($nom_complet) > 45){
-			echo '<br/>Le nom complet est compris entre 5 à 45 caractéres';
-			exit();
-		} 
-		if(is_numeric($nom_complet[0])){
-			echo '<br/>Le  premiers caractéres doit etre une lettre';
-			exit();
-		}
-	}*/
 		
             //CHARGEMENT
            if($_POST){
@@ -29,14 +17,14 @@
           $departement = $_POST['departement'];    
           $commune = $_POST['commune'];  
           $nom_complet = strip_tags($_POST['nom_complet']) ;     
-          $login = strip_tags($_POST['login']); 
+          
           $motdepass = password_hash($_POST['motdepass1'],PASSWORD_DEFAULT);
           $telephone = $_POST['telephone'];
           $email=filter_var($_POST['email'],FILTER_SANITIZE_EMAIL);
           //LISTE DES UTILISATEURS
 		
-        $query = $con->prepare("SELECT login,email,telephone FROM utilisateur WHERE login=? OR email=? OR telephone=? ");
-        $query->execute(array($login,$email,$telephone));
+        $query = $con->prepare("SELECT login,email,telephone FROM utilisateur WHERE  email=? OR telephone=? ");
+        $query->execute(array($email,$telephone));
         $resultat = $query->fetchAll();
       
                 //CONDITION
@@ -63,14 +51,13 @@
 			header('refresh:2,url=creer_compte');
 		}else{
   
-            $query = $con->prepare("INSERT INTO utilisateur(id_region,id_departement,id_commune,nom_complet,login,motdepass,telephone,email) VALUES(?,?,?,?,?,?,?,?)");
-         $query->execute(array($region,$departement,$commune,$nom_complet,$login,$motdepass,$telephone,$email));
+            $query = $con->prepare("INSERT INTO utilisateur(id_region,id_departement,id_commune,nom_complet,motdepass,telephone,email) VALUES(?,?,?,?,?,?,?)");
+         $query->execute(array($region,$departement,$commune,$nom_complet,$motdepass,$telephone,$email));
 
        $message= '<div class="alert alert-success text-center">' .'Inscription réussie !'.'</div>';
       header('refresh:2,url="index.php"');
         
-             }   
-       
+             }          
     
     }
     }
@@ -100,9 +87,7 @@
                           <label for="nom">Nom Complet:</label>
                           <input type="text" id="nom_complet" name="nom_complet" class="form-control py-2 mb-2" autocomplete="off"  required >
 							<small id="out_nom"></small>									                                            
-                          <label for="login">Login:</label>
-                          <input type="text" id="login" name="login" class="form-control py-2 mb-2" autocomplete="off" maxlength="16"  required >
-						<small id="out_login"></small>                                            
+                                                                     
                         <label for="mdp">Mot de Pass:</label>
                         <input type="password" id="motdepass1" name="motdepass1" class="form-control py-2 mb-2" required>
 						<small id="out_motdepass1"></small>                                           
@@ -122,21 +107,21 @@
 						</option>
 						<?php }?>												
 						</select> 
-                                            
+                       
+						
 											
-											
-                                                <label for="departement">Département:</label>
-                                                <select name="departement" class="form-control py-2 mb-2" onChange="ListeCommune(this.value);" id="list_depart">
-												<option value="0">Sélectionner</option>
+                         <label for="departement">Département:</label>
+                          <select name="departement" class="form-control py-2 mb-2" onChange="ListeCommune(this.value);" id="list_depart">
+							<option value="0">Sélectionner</option>
 												
-												</select>
+							</select>
                                            
 											
                                                 <label for="commune">Commune:</label>
                                                 <select name="commune" class="form-control py-2 mb-2" id="list_comm" >
 												<option value="0">Sélectionner</select>
 												</select>
-                                            
+                     
                                               
                                                 <label for="email">Adresse Mail:</label>
                                                 <input type="text" name="email" class="form-control py-2 mb-2" required>
@@ -149,7 +134,7 @@
                                            
                                             <button type="submit" name="envoyer" class="btn btn-success btn-block">Envoyer</button>
                                             </form>
-											<a href="index" class="btn btn-danger btn-block">Annuler</a>
+											<a href="index" class="btn btn-primary btn-block">Annuler</a>
 					
 					</div>
 				</div>

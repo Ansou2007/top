@@ -1,3 +1,13 @@
+<?php
+    require_once 'utilisateur/core/connection.php';
+
+
+
+    $query = $con->prepare('SELECT temoignage.id_utilisateur,message,nom_complet,date_temoignage FROM temoignage,utilisateur WHERE id_utilisateur = utilisateur.id');
+    $query->execute();
+    $resultat = $query->fetchAll();
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -140,7 +150,7 @@
       </div>
     </section><!-- End Cta Section -->
 
-    <!-- ======= About Us Section ======= -->
+    <!-- ======= A PROPOS ======= -->
     <section id="about" class="about">
       <div class="container" data-aos="fade-up">
 
@@ -175,7 +185,7 @@
       </div>
     </section><!-- End About Us Section -->
 
-    <!-- ======= Counts Section ======= -->
+    <!-- ======= STATISTIQUE ======= -->
     <section id="counts" class="counts">
       <div class="container" data-aos="fade-up">
 
@@ -221,7 +231,8 @@
         </div>
 
       </div>
-    </section><!-- End Counts Section -->
+    </section>
+    <!-- FIN STATISTIQUE  -->
 
  
 
@@ -280,93 +291,40 @@
         </form>
 
       </div>
-    </section><!-- End Appointment Section -->
+    </section><!-- FIN CONTACT Section -->
 
    
 
-    <!-- ======= Testimonials Section ======= -->
+    <!-- ======= TEMOIGNAGE Section ======= -->
     <section id="testimonials" class="testimonials">
       <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
+        <div class="section-title">            
           <h2>Témoignages</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-        </div>
-
-        <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
-          <div class="swiper-wrapper">
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
+          <p>Voici ce que pense les utilisateurs de cette application. Vous pouvez aussi partager votre experience</p>
+        </div>                
+        <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">   
+          <?php foreach($resultat as $temoignage) { ?>
+          <div class="swiper-wrapper">                          
+            <div class="swiper-slide">        
+              <div class="testimonial-item">              
+                <p>  
+                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>                                      
                   <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                 </p>
                 <img src="assets/img/temoignage/temoignage.jpg" class="testimonial-img" alt="">
-                <h3>Saul Goodman</h3>
-                <h4>Utilisateur</h4>
+                <h3></h3>
+                <h4></h4>
               </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-                <img src="assets/img/temoignage/temoignage.jpg" class="testimonial-img" alt="">
-                <h3>Sara Wilsson</h3>
-                <h4>Utilisateur</h4>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-                <img src="assets/img/temoignage/temoignage.jpg" class="testimonial-img" alt="">
-                <h3>Jena Karlis</h3>
-                <h4>Utilisateur</h4>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-                <img src="assets/img/temoignage/temoignage.jpg" class="testimonial-img" alt="">
-                <h3>Matt Brandon</h3>
-                <h4>Utilisateur</h4>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-                <img src="assets/img/temoignage/temoignage.jpg" class="testimonial-img" alt="">
-                <h3>John Larson</h3>
-                <h4>Utilisateur</h4>
-              </div>
-            </div><!-- End testimonial item -->
-
+                 
+            </div>     
           </div>
           <div class="swiper-pagination"></div>
+       <?php } ;?>
         </div>
-
+        
       </div>
-    </section><!-- End Testimonials Section -->
+      
+    </section><!-- FIN TEMOIGNAGE Section -->
 
     
 

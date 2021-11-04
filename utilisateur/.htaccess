@@ -11,13 +11,17 @@ RewriteRule ^liste_departement views/utilisateur/liste_departement.php
 
 #### PERDU ###
 RewriteRule ^perdu$ views/perdu/index.php
-RewriteRule ^ajout_cellule$ views/cellule/ajout_cellule.php
-RewriteRule ^supprimer_cellule$ views/cellule/supprimer_cellule.php
+RewriteRule ^ajout_perdu$ views/perdu/ajout_perdu.php
+RewriteRule ^supprimer_cellule$ views/perdu/supprimer_perdu.php
 
-### MILTROUVEITANT ###
-RewriteRule ^ajout_militant$ views/militant/ajout_militant.php
-RewriteRule ^supprimer_militant$ views/militant/supprimer_militant.php
+### TROUVE ###
+RewriteRule ^ajout_trouve$ views/trouve/ajout_trouve.php
+RewriteRule ^supprimer_trouve$ views/trouve/supprimer_trouve.php
 RewriteRule ^trouve$ views/trouve/index.php
+### TEMOIGNAGE ###
+RewriteRule ^ajout_temoignage$ views/temoignage/ajout_temoignage.php
+RewriteRule ^supprimer_trouve$ views/temoignage/supprimer_trouve.php
+RewriteRule ^temoignage$ views/temoignage/index.php
 
 ### UTILISATEUR ###
 RewriteRule ^utilisateur$ views/utilisateur/index.php

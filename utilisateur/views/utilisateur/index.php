@@ -28,7 +28,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="ajout_cellule.php" method="POST">
+      <form action="ajout_utilisateur.php" method="POST">
 
         <div class="modal-body">
 
@@ -36,10 +36,7 @@
                 <label> Nom Complet </label>
                 <input type="text" name="nom_cellule" class="form-control" >
             </div>
-			<div class="form-group">
-                <label> Login </label>
-                <input type="text" name="login" value="" class="form-control" >
-            </div>
+			
 			<div class="form-group">
                 <label> Mot de Passe </label>
                 <input type="password" name="motdepass" value="" class="form-control" >
@@ -99,24 +96,22 @@
       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
           <tr>          
-            <th>Nom Complet </th>
-            <th>Login </th>          
+            <th>Nom Complet </th>                   
             <th>Télephone </th>
             <th>Email</th>
-			<th>Role</th>
-			<th>Etat Compte </th>
-			<th>Commune</th>
-			<th>Département</th>
-			<th>Région</th>
-			<th>Editer</th>
-			<th>Supprimer</th>
+            <th>Role</th>
+            <th>Etat Compte </th>
+            <th>Commune</th>
+            <th>Département</th>
+            <th>Région</th>
+            <th>Editer</th>
+            <th>Supprimer</th>
           </tr>
         </thead>
         <tbody>   
 		<?php foreach($utilisateur as $utilisateur){?>
           <tr>          
-            <td><?=$utilisateur['nom_complet']?></td>
-            <td><?=$utilisateur['login']?></td>
+            <td><?=$utilisateur['nom_complet']?></td>           
 			<td><?=$utilisateur['telephone']?></td>
             <td><?=$utilisateur['email']?></td> 
 			<td><?=$utilisateur['role']?></td>
@@ -127,7 +122,7 @@
 			}
 				?>
 			</td> 
-			<td><?=$utilisateur['groupe']?></td>
+			
             <td></td> 
 			<td> </td>
              

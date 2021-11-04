@@ -1,6 +1,6 @@
 <?php
 $serveur="localhost";
-$database="pastef";
+$database="trouve_ou_perdu";
 $utilisateur="root";
 $modpass="";
 

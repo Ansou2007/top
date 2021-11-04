@@ -50,11 +50,11 @@ id int PRIMARY KEY AUTO_INCREMENT,
 id_utilisateur int(11),
 code_declaration varchar(100),
 date_declaration datetime,
-description varchar(250), /*Description de l'objet perdu*/
+descriptions varchar(250), /*Description de l'objet perdu*/
 images text,
-objet_trouve varchar(3) DEFAULT 'NON',/* OUI: objet trouvé  NON: objet non trouvé*/
+archiver varchar(3) DEFAULT 'NON',/* OUI:   NON: */
 contact varchar(25), /*Le numero a contacter au cas ou l'objet est trouvé*/
-autorisation varchar(20) /* Approuver, Mise en Examen,Archiver*/
+autorisation varchar(30) DEFAULT 'Mise en Examen' /* Approuver, Mise en Examen*/
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ALTER TABLE declaration_perdu ADD CONSTRAINT fk_perdu_uti FOREIGN KEY(id_utilisateur) REFERENCES utilisateur(id)
 ON UPDATE CASCADE; 
@@ -64,20 +64,30 @@ id int PRIMARY KEY AUTO_INCREMENT,
 id_utilisateur int(11),
 code_trouve varchar(100),
 date_declaration datetime,
-description varchar(250), /*Description de l'objet perdu*/
+descriptions varchar(250), /*Description de l'objet perdu*/
 images text,
-objet_trouve varchar(3) DEFAULT 'NON',/* OUI: objet trouvé  NON: objet non trouvé*/
+archiver varchar(3) DEFAULT 'NON',/* OUI: objet trouvé  NON: objet non trouvé*/
 contact varchar(25), /*Le numero a contacter au cas ou l'objet est trouvé*/
-autorisation varchar(20) /* Approuver, Mise en Examen,Archiver*/
+autorisation varchar(30) DEFAULT 'Mise en Examen' /* Approuver, Mise en Examen*/
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ALTER TABLE declaration_trouve ADD CONSTRAINT fk_trouv_uti FOREIGN KEY(id_utilisateur) REFERENCES utilisateur(id)
+ON UPDATE CASCADE;
+
+CREATE TABLE temoignage(
+id int PRIMARY KEY AUTO_INCREMENT,
+id_utilisateur int(11),
+message varchar(255),
+date_temoignage datetime,
+suivi varchar(20) DEFAULT 'Mise en Examen' /* Approuver, Mise en Examen,Archiver*/
+)ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+ALTER TABLE temoignage ADD CONSTRAINT fk_ut_tem FOREIGN KEY(id_utilisateur) REFERENCES utilisateur(id)
 ON UPDATE CASCADE; 
 
 CREATE TABLE historique(
 id int auto_increment PRIMARY KEY,
 date_journal datetime,
 id_utilisateur int,
-action varchar(150)
+action varchar(150) 
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ALTER TABLE historique ADD CONSTRAINT fk_hist_util FOREIGN KEY(id_utilisateur) REFERENCES utilisateur(id)
 ON UPDATE CASCADE;

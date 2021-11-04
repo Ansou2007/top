@@ -4,12 +4,12 @@ require_once 'Configuration.php';
 require_once('core/connection.php');
 include('includes/header.php'); 
 session_start();
-		@$login = strip_tags(trim($_POST['login']));
+		@$login = strip_tags(trim($_POST['email']));
 		@$motdepass = strip_tags($_POST['mot_de_passe']);
 		@$valider=$_POST["valider"];
 	
 	if(isset($valider)){
-		$query=$con->prepare('select * from utilisateur,region,departement,commune where login=? and utilisateur.id_commune=commune.id and utilisateur.id_departement=departement.id ');
+		$query=$con->prepare('select * from utilisateur,region,departement,commune where email=? and utilisateur.id_commune=commune.id and utilisateur.id_departement=departement.id ');
 		//$query->setFetchMode(PDO::FETCH_ASSOC);
 		$query->bindValue(1,$login);
 		$query->execute();
@@ -20,7 +20,7 @@ session_start();
 		else{
 			if($utilisateur['etat']==="0" )
 			{
-				$erreur = "Votre compte n'est pas activé,Contacter l'administrateur sur 774418426";
+				$erreur = "Votre compte n'est pas activé,Contacter l'administrateur";
 			}else{			
 			header('location:accueil');
 			$_SESSION['utilisateur'] = $utilisateur;
@@ -67,7 +67,7 @@ session_start();
                 <form class="user" action="" method="POST">
 
                     <div class="form-group">
-                    <input type="text" name="login" class="form-control form-control-user" placeholder="Votre nom d'utilisateur...">
+                    <input type="text" name="email" class="form-control form-control-user" placeholder="Votre nom d'utilisateur...">
                     </div>
                     <div class="form-group">
                     <input type="password" name="mot_de_passe" class="form-control form-control-user" placeholder="Votre Mot de passe">

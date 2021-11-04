@@ -6,85 +6,50 @@
 	include base_app.'/includes/header.php';
 	include base_app.'/includes/navbar.php';
 	
-		//CHARGEMENT  DE LA LISTE DES CELLULES
-		$query = $con->prepare("SELECT cellule.id,id_commune,nom_cellule FROM cellule,commune WHERE cellule.id_commune=commune.id AND id_commune='$id_commune' order by nom_cellule");
-		$query->execute();
-		$cellule = $query->fetchAll();
 		
-		//POUR CHARGER LA TABLE DES MILITANTS
-	$query = $con->prepare("SELECT * FROM militant,cellule,commune WHERE militant.id_cellule=cellule.id AND cellule.id_commune=commune.id AND id_commune='$id_commune'");
-	$query->execute();
-	$militant = $query->fetchAll()
+  $code = "DT-".strtoupper(substr(md5(uniqid()),0,4)).date('dy');
+
+  $query = $con->prepare("SELECT * FROM declaration_trouve");
+  $query->execute();
+  $resultat = $query->fetchall();
 ?>
 
 			<!--MODAL-->
-			
-		
+				
 		<div class="modal fade" id="ajout_trouve" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Militant</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Déclaration</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="ajout_militant" method="POST">
-
+      <!--FORM AJOUT DECLARATION-->
+      <form action="ajout_trouve" method="POST" enctype="multipart/form-data">
         <div class="modal-body">
-
+				<input type="hidden" name="id_utilisateur" value="<?=$id_login;?>">
+        <div class="form-group">
+          <label>Numéro D'enregistrement</label>
+          <input type="text" value="<?=$code?>" name="numero" class="form-control" readonly >
+        </div>
+        <label>Description</label>
+            <div class="form-group">            
+                <textarea name="description" id="" cols="0" rows="0" class="form-control"></textarea>
+            </div>
+		      	<div class="form-group">
+                <label> Personne A Contacter </label>
+                <input type="number" name="contact" value="" class="form-control"  >
+            </div>
             <div class="form-group">
-                <label> Nom Complet </label>
-                <input type="text" name="nom_complet" class="form-control" required>
+                <label>Image </label>
+                <input type="file" name="photo" value="" class="form-control"  >
             </div>
-			<div class="form-group">
-                <label> Nom Cellule </label>
-                <select class="form-control" name="id_cellule">
-				<option value="0">Sélectionner</option>
-				<?php 												
-				foreach($cellule as $cellule)
-				{?>
-				<option											
-				value="<?php echo  $cellule['id'] ?>" > 
-				<?php echo  $cellule['nom_cellule'] ?> 														
-				</option>
-						<?php }?>
-				</select>
-            </div>
-			<div class="form-group">
-                <label> Date Naissance </label>
-                <input type="date" name="date_naissance" class="form-control" required>
-            </div>
-			<div class="form-group">
-                <label> Lieu Naissance </label>
-                <input type="text" name="lieu_naissance" class="form-control" required >
-            </div>
-			<div class="form-group">
-                <label> Télephone </label>
-                <input type="text" name="telephone" class="form-control" required>
-            </div>
-			<div class="form-group">
-                <label> Cin </label>
-                <input type="text" name="cin" class="form-control" required>
-            </div>
-			<div class="form-group">
-                <label> Numero d'electeur </label>
-                <input type="text" name="numero_electeur" class="form-control" >
-            </div>
-			<div class="form-group">
-                <label> Lieu de Vote </label>
-                <input type="text" name="lieu_vote" class="form-control">
-            </div>
-			<div class="form-group">
-                <label> N° Carte Membre </label>
-                <input type="text" name="numero_carte" class="form-control">
-            </div>
-      
-        
+    
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-            <button type="submit" name="enregistrer" class="btn btn-primary">Enregistrer</button>
+            <button type="submit" name="enregistrer" class="btn btn-primary">Déclarer</button>
         </div>
       </form>
 
@@ -110,7 +75,7 @@
 		<div class="card shadow mb-4">
 		<div class="card-header py-3">
 			<h6 class="m-0 font-weight-bold text-primary"> 
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ajout_militant">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ajout_trouve">
               Ajouter Déclaration
             </button>
     </h6>
@@ -136,26 +101,46 @@
       <th>Numéro</th>             
 			<th>Date</th>
 			<th>Description</th>
-			<th>contact</th>
+			<th>Contact</th>
 			<th>Suivi</th> 
+      <th>Arhiver</th> 
 			<th>Image</th>
-            <th width="15%">Modifier </th>
-            <th width="15%">Supprimer </th>
+      <th width="15%">Modifier </th>
+      <th width="15%">Supprimer </th>
           </tr>
         </thead>
         <tbody>   
-			
+          <?php foreach($resultat as $trouve){ ?>
           <tr>          
-            <td class="text-center"></td>
-            <td class="text-center"></td>
-			<td></td>
-            <td></td> 			
-            <td></td>
-            <td></td>
-			<td></td>
-			<td></td>			
+            <td class="text-center"><?=$trouve['code_trouve']?></td>
+            <td class="text-center"><?=$trouve['date_declaration']?></td>
+			      <td><?=$trouve['descriptions']?></td>
+            <td><?=$trouve['contact']?></td> 			
+            <td>
+              <?php
+            if($trouve['autorisation']=="Mise en Examen"){
+              echo '<div class="alert alert-danger">'.$trouve['autorisation'].'</div>';
+            }else{
+              echo '<div class="alert alert-success">'.$trouve['autorisation'].'</div>';
+            }
+            ?>
+            </td>
+            <td><?=$trouve['archiver']?></td>
+            <td><?=$trouve['images']?></td>
+            <td>
+              <form method="" action="">
+                <input type="hidden" name="id">
+                <button class="form-control btn btn-success" name="modifier">Modifier</button>
+              </form>
+            </td>
+            <td>
+            <form method="" action="">
+                <input type="hidden" name="id">
+                <button class="form-control btn btn-danger" name="modifier">Supprimer</button>
+              </form>
+            </td>			
           </tr>
-		 
+          <?php }?>
         </tbody>
       </table>
 

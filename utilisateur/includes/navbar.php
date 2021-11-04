@@ -4,8 +4,8 @@
 		$id_commune = $_SESSION['utilisateur']['id_commune'];
 		$id_departement = $_SESSION['utilisateur']['id_departement'];
 		$id_region = $_SESSION['utilisateur']['id_region'];
-		$login = $_SESSION['utilisateur']['login'];
-		$groupe = $_SESSION['utilisateur']['groupe'];
+		$login = $_SESSION['utilisateur']['nom_complet'];
+		//$groupe = $_SESSION['utilisateur']['groupe'];
 		$role = $_SESSION['utilisateur']['role'];
 		$commune = $_SESSION['utilisateur']['nom_commune'];
 		$departement = $_SESSION['utilisateur']['nom_departement'];
@@ -81,7 +81,11 @@
       ?>
 
 
-
+	<li class="nav-item">
+        <a class="nav-link" href="temoignage">
+          <i class="fas fa-fw fa-task-list"></i>
+          <span>TEMOIGNAGES</span></a>
+      </li>
 
 
 <!-- Divider -->
