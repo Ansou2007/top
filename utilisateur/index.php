@@ -1,102 +1,99 @@
-<?php
 
-require_once 'Configuration.php';
-require_once('core/connection.php');
-include('includes/header.php'); 
-session_start();
-		@$login = strip_tags(trim($_POST['email']));
-		@$motdepass = strip_tags($_POST['mot_de_passe']);
-		@$valider=$_POST["valider"];
-	
-	if(isset($valider)){
-		$query=$con->prepare('select * from utilisateur,region,departement,commune where email=? and utilisateur.id_commune=commune.id and utilisateur.id_departement=departement.id ');
-		//$query->setFetchMode(PDO::FETCH_ASSOC);
-		$query->bindValue(1,$login);
-		$query->execute();
-		$utilisateur=$query->fetch();
-		if(!password_verify($motdepass,$utilisateur['motdepass']))
-		$erreur = "Login ou Mot de passe incorrecte";
+<?php
+		require_once 'Configuration.php';
+		require_once('core/connection.php');	
+		require_once base_app.'/views/utilisateur/authentification.php';
+		//session_start();
 		
-		else{
-			if($utilisateur['etat']==="0" )
-			{
-				$erreur = "Votre compte n'est pas activé,Contacter l'administrateur";
-			}else{			
-			header('location:accueil');
-			$_SESSION['utilisateur'] = $utilisateur;
-			$_SESSION['time'] = time();
-			}
-		}
-	}
+	
+
+	
 ?>
 
+<!DOCTYPE html>
+<html lang="fr">
 
+<head>
+    <title>Se connecter</title>
+    <meta charset="utf-8">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="connexion.css">
+</head>
 
+<body>
+    <form action="" method="POST">
+        <section class="vh-450 gradient-custom">
+            <div class="container py-5 h-450">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                        <div class="card bg-dark text-white" style="border-radius: 1rem;">
+                            <div class="card-body p-5 text-center">
 
-<div class="container">
+                                <div class="mb-md-5 mt-md-4 pb-5">
+									
+									<div class="alert alert-danger">
+										<li>Erreur</li>
+									</div>
 
-<!-- Outer Row -->
-<div class="row justify-content-center">
+                                    <h2 class="fw-bold mb-2 text-uppercase"><strong>Systéme d'Authentification</strong></h2>
+									
+                                    <p class="text-white-50 mb-5"><strong>Veillez entrer votre nom d'utilisataur et le mot de pass !</strong></p>
 
-  <div class="col-xl-6 col-lg-6 col-md-6">
+                                    <div class="form-outline form-white mb-5">
 
-    <div class="card o-hidden border-0 shadow-lg my-5">
-      <div class="card-body p-0">
-        <!-- Nested Row within Card Body -->
-        <div class="row">
-			
-          <div class="col-lg-12">
-		  
-            <div class="p-5">
-              <div class="text-center">
-					 <?php
-			
-                    if(isset($erreur)) 
-                    {
-                        echo '<h5 class="bg-danger text-white"> '.$erreur.' </h5>';
-							header('refresh:3,url=index');
-                        $erreur = null;
-                    }
-					
-                ?>
-			  
-                <h1 class="h4 text-gray-900 mb-4">SYSTEME D'AUTHENTIFICATION</h1>
-               
-              </div>
+                                        <input type="email" name="email" placeholder="votre mail" class="form-control form-control-lg" />
+                                    </div>
 
-                <form class="user" action="" method="POST">
+                                    <div class="form-outline form-white mb-5">
 
-                    <div class="form-group">
-                    <input type="text" name="email" class="form-control form-control-user" placeholder="Votre nom d'utilisateur...">
+                                        <input type="password" name="motdepass"  placeholder="Mot de pass" class="form-control form-control-lg" />
+                                    </div>
+									<button name="valider" class="btn btn-outline-light btn-lg px-5" type="submit"><strong>S'indentifier</strong></button>
+                                    <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#"><strong>Mot de pass oublié?</strong></a></p>
+                                    <div class="d-flex justify-content-center text-center mt-4 pt-1">
+                                        <a href="#!" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
+                                        <a href="#!" class="text-white"><i class="fab fa-twitter fa-lg mx-4 px-2"></i></a>
+                                        <a href="#!" class="text-white"><i class="fab fa-google fa-lg"></i></a>
+                                    </div>
+
+                                </div>
+
+                                <div>
+                                    <p class="mb-0">Si vous n'avez pas de compte? <a href="#" class="text-white-50 fw-bold">Créer</a></p>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                    <input type="password" name="mot_de_passe" class="form-control form-control-user" placeholder="Votre Mot de passe">
-                    </div>
-            
-                    <button type="submit" name="valider" class="btn btn-primary btn-user btn-block"> Connecter </button>
-                    <hr>
-                </form>
-					<a class="btn btn-warning btn-block" href="creer_compte">Créer un Compte</a>
-					
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-	  <div class="card-footer">
-	  <input type="checkbox" name="souvenir"> <span>Se souvenir </span>
-	  <a class="float-right" href="recuperation">Mot de passe Oublié ?</a>
-	  <b><p class="text-center" style="color:black">Copyright &copy; IDA-P6-<?php echo date('Y')?>
-	  
-	  </div>
-    </div>
-
-  </div>
-
-</div>
-
-</div>
+        </section>
 
 
-<?php
-//include('includes/scripts.php'); 
-?>
+
+
+    </form>
+
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+</body>
+
+</html>
+
+
+</body>
+
+</html>

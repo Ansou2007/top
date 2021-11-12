@@ -14,6 +14,7 @@
 							$_SESSION['time'] = time();            // Session reactialisé
 						else                                       // Sinon
 								session_destroy();                 // Session detruite
+								//session_unset();
 						 }
 					}
 

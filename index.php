@@ -6,6 +6,43 @@
     $query = $con->prepare('SELECT temoignage.id_utilisateur,message,nom_complet,date_temoignage FROM temoignage,utilisateur WHERE id_utilisateur = utilisateur.id');
     $query->execute();
     $resultat = $query->fetchAll();
+
+    $query = $con->prepare('SELECT * FROM declaration_perdu');
+    $query->execute();
+    $perdus = $query->fetchAll();
+
+    $query = $con->prepare('SELECT * FROM declaration_trouve');
+    $query->execute();
+    $trouve = $query->fetchAll();
+
+    
+   
+    function Nbre_Perdus(){
+          global $con;
+          $query = $con->query("SELECT  count(*) nombre  FROM declaration_perdu");
+          $query->execute();
+          $nbre = $query->fetch();
+          return $nbre['nombre'];
+      }
+      function Nbre_Trouves(){
+        global $con;
+        $query = $con->query("SELECT  count(*) nombre  FROM declaration_trouve");
+        $query->execute();
+        $nbre = $query->fetch();
+        return $nbre['nombre'];
+     }
+    function Nbre_Utilisateur(){
+      global $con;
+      $query = $con->query("SELECT  count(*) nombre  FROM utilisateur");
+      $query->execute();
+      $nbre = $query->fetch();
+      return $nbre['nombre'];
+     }
+    
+
+      $NbrePerdus = Nbre_Perdus();
+      $NbreTrouve = Nbre_Trouves();
+      $NbreUtilisateur = Nbre_Utilisateur();
 ?>
 
 <!DOCTYPE html>
@@ -74,7 +111,7 @@
           <li><a class="nav-link scrollto " href="index.php">Accueil</a></li>
           <li><a class="nav-link scrollto" href="#apropos">Apropos</a></li>
           <li><a class="nav-link scrollto" href="#perdus">Perdus</a></li>
-          <li><a class="nav-link scrollto" href="#trouve">Trouvé</a></li>       
+          <li><a class="nav-link scrollto" href="#trouves">Trouvé</a></li>       
           <li><a class="nav-link scrollto" href="#contacter">Nous contacter</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
@@ -151,12 +188,12 @@
     </section><!-- End Cta Section -->
 
     <!-- ======= A PROPOS ======= -->
-    <section id="about" class="about">
+    <section id="apropos" class="about">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
           <h2>Apropos de Nous</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <p>TOP est une plateforme qui vous permet de retrouver ou de declarer vos objets perdus.</p>
         </div>
 
         <div class="row">
@@ -164,15 +201,14 @@
             <img src="assets/img/about.jpg" class="img-fluid" alt="">
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0 content" data-aos="fade-left">
-            <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
+            <h3>Notre équipe est composé de developpeur chevronnés</h3>
             <p class="fst-italic">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-              magna aliqua.
+              L'application permet entre autre de realiser les taches ci-aprés.
             </p>
             <ul>
-              <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-              <li><i class="bi bi-check-circle"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-              <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
+              <li><i class="bi bi-check-circle"></i> De déclarer des objets perdus et de faire le suivi.</li>
+              <li><i class="bi bi-check-circle"></i> De déclarer des objet trouvé à votre possession.</li>
+              <li><i class="bi bi-check-circle"></i>D'administer vos déclarations pour un eventuel suivi</li>
             </ul>
             <p>
               Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
@@ -194,7 +230,7 @@
           <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch">
             <div class="count-box">
               <i class="fas fa-user"></i>
-              <span data-purecounter-start="0" data-purecounter-end="85" data-purecounter-duration="1" class="purecounter"></span>
+              <span data-purecounter-start="0" data-purecounter-end="<?=$NbreUtilisateur?>" data-purecounter-duration="1" class="purecounter"></span>
 
               <p><strong>Utilisateurs</strong> </p>
               
@@ -204,18 +240,18 @@
           <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch">
             <div class="count-box">
               <i class="fas fa-search"></i>
-              <span data-purecounter-start="0" data-purecounter-end="26" data-purecounter-duration="1" class="purecounter"></span>
+              <span data-purecounter-start="0" data-purecounter-end="<?= $NbrePerdus?>" data-purecounter-duration="1" class="purecounter"></span>
               <p><strong>Objets Perdus</strong></p>
-              <a href="#">Voir +</a>
+             
             </div>
           </div>
 
           <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch">
             <div class="count-box">
               <i class="fas fa-clipboard-check"></i>
-              <span data-purecounter-start="0" data-purecounter-end="14" data-purecounter-duration="1" class="purecounter"></span>
+              <span data-purecounter-start="0" data-purecounter-end="<?=$NbreTrouve?>" data-purecounter-duration="1" class="purecounter"></span>
               <p><strong>Objets Trouvés</strong></p>
-              <a href="#">Voir +</a>
+              
             </div>
           </div>
 
@@ -224,7 +260,7 @@
               <i class="fas fa-award"></i>
               <span data-purecounter-start="0" data-purecounter-end="150" data-purecounter-duration="1" class="purecounter"></span>
               <p><strong>Archive</strong></p>
-              <a href="#">Voir +;</a>
+              
             </div>
           </div>
 
@@ -235,6 +271,79 @@
     <!-- FIN STATISTIQUE  -->
 
  
+    <!-- ======= PERDU Section ======= -->
+    <section id="perdus" class="testimonials">
+     
+      <div class="container" data-aos="fade-up">        
+        <div class="section-title">            
+          <h2>OBJETS PERDUS</h2>
+          <p>Voici ce que pense les utilisateurs de cette application. Vous pouvez aussi partager votre experience</p>       
+        </div>  
+                  
+        <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">                 
+          <div class="swiper-wrapper">  
+
+         <?php  foreach($perdus as $perdus): ?> 
+            <div class="swiper-slide">                     
+              <div class="testimonial-item">                         
+                <p>  
+                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>    
+                  <?=$perdus['descriptions']?>                                  
+                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                </p>
+                
+                <h3>Contact: <?=$perdus['contact']?>  </h3>
+                <h4></h4>               
+              </div>                            
+            </div> 
+           <?php  endforeach ?>   
+          </div>
+          <div class="swiper-pagination">           
+          </div>
+                  
+        </div> 
+           
+      </div>
+      
+    </section>
+    <!-- FIN PERDU Section -->
+
+    <!-- ======= TROUVE Section ======= -->
+    <section id="trouves" class="testimonials">
+     
+      <div class="container" data-aos="fade-up">        
+        <div class="section-title">            
+          <h2>OBJETS TROUVE</h2>
+          <p>Voici ce que pense les utilisateurs de cette application. Vous pouvez aussi partager votre experience</p>       
+        </div>  
+                  
+        <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">                 
+          <div class="swiper-wrapper">  
+
+         <?php  foreach($trouve as $trouves): ?> 
+            <div class="swiper-slide">                     
+              <div class="testimonial-item">                         
+                <p>  
+                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>    
+                  <?=$trouves['descriptions']?>                                  
+                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                </p>
+                
+                <h3>Contact :<?=$trouves['contact']?></h3>
+                <h4></h4>               
+              </div>                            
+            </div> 
+           <?php  endforeach ?>   
+          </div>
+          <div class="swiper-pagination">           
+          </div>
+                  
+        </div> 
+           
+      </div>
+      
+    </section>
+    <!-- FIN TROUVE Section -->
 
 
 
@@ -244,7 +353,7 @@
 
         <div class="section-title">
           <h2>VOS QUESTIONS</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <p>Vos questions sont les bienvenues.Notre équipe vous répondra dans les plus bref délai</p>
         </div>
 
         <form action="" method="post" role="form" class="php-email-form" data-aos="fade-up" data-aos-delay="100">
@@ -297,34 +406,40 @@
 
     <!-- ======= TEMOIGNAGE Section ======= -->
     <section id="testimonials" class="testimonials">
-      <div class="container" data-aos="fade-up">
+     
+      <div class="container" data-aos="fade-up">        
         <div class="section-title">            
           <h2>Témoignages</h2>
-          <p>Voici ce que pense les utilisateurs de cette application. Vous pouvez aussi partager votre experience</p>
-        </div>                
-        <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">   
-          <?php foreach($resultat as $temoignage) { ?>
-          <div class="swiper-wrapper">                          
-            <div class="swiper-slide">        
-              <div class="testimonial-item">              
+          <p>Voici ce que pense les utilisateurs de cette application. Vous pouvez aussi partager votre experience</p>       
+        </div>  
+                  
+        <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">                 
+          <div class="swiper-wrapper">  
+
+         <?php  foreach($resultat as $temoignage) { ?> 
+            <div class="swiper-slide">                     
+              <div class="testimonial-item">                         
                 <p>  
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>                                      
+                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>    
+                  <?=$temoignage['message']?>                                  
                   <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                 </p>
                 <img src="assets/img/temoignage/temoignage.jpg" class="testimonial-img" alt="">
-                <h3></h3>
-                <h4></h4>
-              </div>
-                 
-            </div>     
+                <h3><?=$temoignage['nom_complet']?>  </h3>
+                <h4></h4>               
+              </div>                            
+            </div> 
+           <?php  } ?>   
           </div>
-          <div class="swiper-pagination"></div>
-       <?php } ;?>
-        </div>
-        
+          <div class="swiper-pagination">           
+          </div>
+                  
+        </div> 
+           
       </div>
       
-    </section><!-- FIN TEMOIGNAGE Section -->
+    </section>
+    <!-- FIN TEMOIGNAGE Section -->
 
     
 

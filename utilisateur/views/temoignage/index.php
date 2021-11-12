@@ -27,7 +27,7 @@
     <!--FORM AJOUT DECLARATION-->
       <form action="ajout_temoignage" method="POST">
         <div class="modal-body">
-				<input type="hidden" name="id_utilisateur" value="<?=$id_login;?>">     
+				<input type="hidden" name="id_utilisateur" value="<?=$id_login?>">     
         <label>Message</label>
             <div class="form-group">            
                 <textarea name="message" id="" cols="0" rows="0" class="form-control"></textarea>
