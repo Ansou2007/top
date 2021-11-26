@@ -1,23 +1,33 @@
 <?php
 
-	session_start();
-		@$login = strip_tags(trim($_POST['email']));
-		@$motdepass = strip_tags($_POST['motdepass']);
-		@$valider=$_POST["valider"];	
-	if(isset($valider)){
+		session_start();
 		
-		$query=$con->prepare("SELECT utilisateur.id,nom_complet,email,motdepass,etat,role,nom_region,nom_departement,nom_commune,utilisateur.id_region,utilisateur.id_commune,utilisateur.id_departement FROM utilisateur,region,departement,commune WHERE email=? AND utilisateur.id_commune=commune.id AND utilisateur.id_departement=departement.id AND utilisateur.id_region=region.id ");
-		//$query->setFetchMode(PDO::FETCH_ASSOC);
+			$erreur = array();
+	if(isset($_POST['valider'])){
+		$login = strip_tags(trim($_POST['email']));
+		$motdepass = strip_tags($_POST['motdepass']);
+		if(empty($login)){
+			//$erreur = '<div class="alert alert-danger">'.'Le champ email est vide' .'</div>';
+			$erreur['mail'] = 'Le champ email est vide';
+			
+		}
+		if(empty($motdepass)){
+			$erreur['password'] = "Le champ Mot de passe est vide";
+		}
+		if(count($erreur)===0){
+
+		
+		$query=$con->prepare("SELECT utilisateur.id,nom_complet,email,motdepass,etat,role,nom_region,nom_departement,nom_commune,utilisateur.id_region,utilisateur.id_commune,utilisateur.id_departement FROM utilisateur,region,departement,commune WHERE email=? AND utilisateur.id_commune=commune.id AND utilisateur.id_departement=departement.id AND utilisateur.id_region=region.id ");		
 		$query->bindValue(1,$login);
 		$query->execute();
 		$utilisateur=$query->fetch();
-		if(!password_verify($motdepass,$utilisateur['motdepass']))
-		$erreur = "Login ou Mot de passe incorrecte";
-		
-		else{
+		}
+		if(!password_verify($motdepass,$utilisateur['motdepass'])){
+			$erreur['incorrect'] = 'Login ou Mot de passe incorrecte';
+		}else{
 			if($utilisateur['etat']==="0" )
 			{
-				$erreur = "Votre compte n'est pas activé,Contacter l'administrateur";
+				$erreur['compte'] = 'Compte non  activé,Contacter les administrateur' ;
 			}else{		
 				
 			header('location:accueil');
@@ -25,5 +35,9 @@
 			$_SESSION['time'] = time();
 			}
 		}
+		
+
+		
+
 	}
 ?>

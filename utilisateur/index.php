@@ -3,11 +3,7 @@
 		require_once 'Configuration.php';
 		require_once('core/connection.php');	
 		require_once base_app.'/views/utilisateur/authentification.php';
-		//session_start();
 		
-	
-
-	
 ?>
 
 <!DOCTYPE html>
@@ -37,23 +33,29 @@
                             <div class="card-body p-5 text-center">
 
                                 <div class="mb-md-5 mt-md-4 pb-5">
+								
 									
+                                    <?php if(count($erreur)>0):?>
 									<div class="alert alert-danger">
-										<li>Erreur</li>
+                                        <?php foreach($erreur as $erreur):?>
+										<li>
+                                            <?php echo $erreur; ?>
+                                        </li>
+                                            <?php endforeach;?>
 									</div>
-
+                                        <?php endif;?>
                                     <h2 class="fw-bold mb-2 text-uppercase"><strong>Systéme d'Authentification</strong></h2>
 									
                                     <p class="text-white-50 mb-5"><strong>Veillez entrer votre nom d'utilisataur et le mot de pass !</strong></p>
 
                                     <div class="form-outline form-white mb-5">
 
-                                        <input type="email" name="email" placeholder="votre mail" class="form-control form-control-lg" />
+                                        <input type="email" name="email" placeholder="votre mail"  class="form-control form-control-lg" />
                                     </div>
 
                                     <div class="form-outline form-white mb-5">
 
-                                        <input type="password" name="motdepass"  placeholder="Mot de pass" class="form-control form-control-lg" />
+                                        <input type="password" name="motdepass"  placeholder="Mot de pass"  class="form-control form-control-lg" />
                                     </div>
 									<button name="valider" class="btn btn-outline-light btn-lg px-5" type="submit"><strong>S'indentifier</strong></button>
                                     <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#"><strong>Mot de pass oublié?</strong></a></p>
