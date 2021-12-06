@@ -68,7 +68,7 @@
                                 </div>
 
                                 <div>
-                                    <p class="mb-0">Si vous n'avez pas de compte? <a href="#" class="text-white-50 fw-bold">Créer</a></p>
+                                    <p class="mb-0">Si vous n'avez pas de compte? <a href="creer_compte" class="text-white-50 fw-bold">Créer</a></p>
                                 </div>
 
                             </div>
