@@ -12,7 +12,7 @@ RewriteRule ^liste_departement views/utilisateur/liste_departement.php
 #### PERDU ###
 RewriteRule ^perdu$ views/perdu/index.php
 RewriteRule ^ajout_perdu$ views/perdu/ajout_perdu.php
-RewriteRule ^supprimer_cellule$ views/perdu/supprimer_perdu.php
+RewriteRule ^supprimer_perdu$ views/perdu/supprimer_perdu.php
 
 ### TROUVE ###
 RewriteRule ^ajout_trouve$ views/trouve/ajout_trouve.php

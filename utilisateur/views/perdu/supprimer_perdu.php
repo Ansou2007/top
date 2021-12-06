@@ -6,17 +6,17 @@
 		if(isset($_POST['btn_supprimer'])) 
 			{
             //On nettoie les valeurs
-				$id_cellule = $_POST['id_cellule'];
+				$id_perdu = $_POST['id_perdu'];
 				
 			        //On prepare la requete
 
-			$query =$con->prepare('DELETE FROM cellule WHERE id=:id');           
-            $query->execute(array(':id'=>$id_cellule));                      
-			$_SESSION['supprime_ok']= "Cellule Supprimée";	 
+			$query =$con->prepare('DELETE FROM declaration_perdu WHERE id=:id');           
+            $query->execute(array(':id'=>$id_perdu));                      
+			$_SESSION['supprime_ok']= "déclaration Supprimée";	 
 			}else{
-			 $message = "Cellule non supprimée";			 
+			 $message = "déclaration non supprimée";			 
 		 }        
-		header("location:cellule");
+		header("location:perdu");
 
 
 ?>

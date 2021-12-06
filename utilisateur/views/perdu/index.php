@@ -128,9 +128,9 @@
               </form>
             </td>
             <td>
-            <form method="" action="">
-                <input type="hidden" name="id">
-                <button class="form-control btn btn-danger" name="modifier">Supprimer</button>
+            <form method="POST" action="supprimer_perdu">
+                <input type="hidden" name="id_perdu" value="<?=$perdu['id']?>" >
+                <button class="form-control btn btn-danger" name="btn_supprimer">Supprimer</button>
               </form>
             </td>			
           </tr>

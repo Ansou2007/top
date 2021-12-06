@@ -134,9 +134,9 @@
               </form>
             </td>
             <td>
-            <form method="" action="">
-                <input type="hidden" name="id">
-                <button class="form-control btn btn-danger" name="modifier">Supprimer</button>
+            <form method="POST" action="supprimer_trouve">
+                <input type="hidden" name="id_trouve" value="<?=$trouve['id']?>">
+                <button class="form-control btn btn-danger" name="btn_supprimer">Supprimer</button>
               </form>
             </td>			
           </tr>

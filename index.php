@@ -103,8 +103,7 @@
     <div class="container d-flex align-items-center">
 
       <a href="index.php" class="logo me-auto"><img src="assets/img/logo.png" alt=""></a>
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <h1 class="logo me-auto"><a href="index.html">Medicio</a></h1> -->
+      
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
@@ -174,7 +173,7 @@
 
     
 
-    <!-- ======= Cta Section ======= -->
+    <!-- ======= Aide Section ======= -->
     <section id="cta" class="cta">
       <div class="container" data-aos="zoom-in">
 
@@ -185,7 +184,7 @@
         </div>
 
       </div>
-    </section><!-- End Cta Section -->
+    </section><!-- End Aide Section -->
 
     <!-- ======= A PROPOS ======= -->
     <section id="apropos" class="about">
@@ -206,20 +205,24 @@
               L'application permet entre autre de realiser les taches ci-aprés.
             </p>
             <ul>
-              <li><i class="bi bi-check-circle"></i> De déclarer des objets perdus et de faire le suivi.</li>
-              <li><i class="bi bi-check-circle"></i> De déclarer des objet trouvé à votre possession.</li>
+              <li><i class="bi bi-check-circle"></i>De déclarer des objets perdus et de faire le suivi.</li>
+              <li><i class="bi bi-check-circle"></i>De déclarer des objet trouvé à votre possession.</li>
               <li><i class="bi bi-check-circle"></i>D'administer vos déclarations pour un eventuel suivi</li>
             </ul>
             <p>
-              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-              culpa qui officia deserunt mollit anim id est laborum
+              Avec TOP Vous pouvez publier une annonce en quelques minutes. 
+			  Vous y trouverez toutes les informations nécessaires pour vos démarches qui vous permettront de retrouver votre objet perdu ou volé ou remettre un objet trouvé à son propriétaire.
+			  Ne tardez pas à publier une annonce. Chaque objet signalé est géré par un interlocuteur unique pour assurer un meilleur suivi et une meilleure qualité de service. 
+			  Vous serez averti par courriel et SMS dès qu'un objet trouvé correspondant à vos critères qui est enregistré dans notre base de données ! Toute notre équipe est basée au Sénégal.
+			  TOP est La solution la plus efficace pour vous éviter de devoir chercher manuellement votre objet perdu ou volé. Comme vous le savez, nous ne pouvons pas vous garantir que vous allez retrouver votre objet perdu. 
+			Cependant nous nous engageons à mettre tout en œuvre pour vous aider à retrouver ce que vous avez perdu !
+
             </p>
           </div>
         </div>
 
       </div>
-    </section><!-- End About Us Section -->
+    </section><!-- End A propos  -->
 
     <!-- ======= STATISTIQUE ======= -->
     <section id="counts" class="counts">
@@ -329,8 +332,8 @@
                   <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                 </p>
                 
-                <h3>Contact :<?=$trouves['contact']?></h3>
-                <h4></h4>               
+                <h4>Contact :<?=$trouves['contact']?></h4>
+                             
               </div>                            
             </div> 
            <?php  endforeach ?>   
